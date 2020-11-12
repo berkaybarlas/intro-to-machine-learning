@@ -1,10 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.stats as stats
-from scipy.optimize import minimize
-from sklearn.naive_bayes import GaussianNB
-from sklearn.tree import DecisionTreeClassifier
-
 
 moon_x = np.loadtxt('./moons/moons.x.csv', delimiter=',')
 moon_y = np.loadtxt('./moons/moons.y.csv', delimiter=',')
@@ -14,14 +9,8 @@ moon_y = np.loadtxt('./moons/moons.y.csv', delimiter=',')
 # Include a plot of the decision region of the optimal decision stump for the moons dataset when the distribution is uniform.
 
 # input: dataset X and labels y (in {+1, -1})
-hypotheses = []
-hypothesis_weights = []
 
-X = moon_x 
-y = moon_y
 N, _ = moon_x.shape
-d = np.ones(N) / N
-
 
 merged = np.concatenate((moon_x,moon_y[:,None]),axis=1)
 
@@ -73,12 +62,8 @@ for i in range(t_N-1):
         best_point_y = split_point
 print("best y split ",best_error, best_point_y)
 
+# A plot of the decision region of the optimal decision stump for the moons dataset when the distribution is uniform.
 plt.scatter(merged[:,0], merged[:,1], c=merged[:,2])
 plt.plot([-2,3],[best_point_y,best_point_y], color="black")
 plt.plot([best_point_x,best_point_x],[-1.3,1.8], color="black")
 plt.show()
-
-
-# Hint: You might consider, for each feature, sorting the data, and limiting your choices of s.
-
-# Include a plot of the decision region of the optimal decision stump for the moons dataset when the distribution is uniform.

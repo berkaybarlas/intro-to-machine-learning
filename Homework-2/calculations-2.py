@@ -47,8 +47,8 @@ for n in nValues:
           averageE = 0.1
      errorsN.append(averageE/n)
 
-dValues = np.arange(2, 300, 1)
-n = 120
+dValues = np.arange(2, 200, 1)
+n = 100
 z = np.random.normal(mu, sigma, n)
 errorsD = []
 for D in dValues:

@@ -26,10 +26,10 @@ col_medians = np.median(spambase[:2000,:], axis=0)
 
 for i in range(rows):
      for j in range(columns-1):
-          if(col_medians[j] < spambase[i][j]):
-               quantize_spambase[i][j] = 1
-          else:
+          if(col_medians[j] > spambase[i][j]):
                quantize_spambase[i][j] = 0
+          else:
+               quantize_spambase[i][j] = 1
 
 X = quantize_spambase[:, :-1]
 y = quantize_spambase[:, -1].astype(int)
@@ -63,8 +63,9 @@ print("Number of mislabeled classes out of a total %d points : %d" % (test_data_
 training_class_sum = np.sum(train_y)
 training_class_majority = 0
 if training_class_sum > (train_data_size / 2):
-     #Majority classes are 1
+     #Means Majority classes are 1, else stays 0
      training_class_majority = 1
+
 sanity_error = np.sum(np.abs(np.subtract(test_y, training_class_majority)))
 sanity_error_per = np.sum(np.abs(np.subtract(test_y, training_class_majority))) / (test_data_size) * 100
 print("Training class majority: ", training_class_majority, "\nSanity error percentage %" ,sanity_error_per)
